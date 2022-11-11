@@ -1,4 +1,3 @@
-from UI.Plot import plot_function
-import Algorithms.Function
+from UI.UserInterface import user_interface
 
-plot_function()
+user_interface()
