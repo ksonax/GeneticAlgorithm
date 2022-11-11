@@ -46,6 +46,7 @@ def eggholder_function(x1, x2):
     return -1 * (x2 + 47) * sin(sqrt(fabs(x2 + x1 / 2 + 47))) - x1 * sin(sqrt(fabs(x1 - (x2 + 47))))
 
 
+
 # 10
 def easom_function(x1, x2):
     return -1 * cos(x1) * cos(x2) * exp(-1 * pow((x1 - pi), 2) - pow((x2 - pi), 2))
