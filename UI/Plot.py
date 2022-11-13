@@ -6,9 +6,8 @@ from Algorithms.FunctionsConst import BEALE_FUNCTION_CONST
 from matplotlib.colors import LogNorm
 
 
-
 def plot_function():
-    f  = lambda x, y: (1.5 - x + x*y)**2 + (2.25 - x + x*y**2)**2 + (2.625 - x + x*y**3)**2
+    f = lambda x, y: (1.5 - x + x*y)**2 + (2.25 - x + x*y**2)**2 + (2.625 - x + x*y**3)**2
 
     xmin, xmax, xstep = BEALE_FUNCTION_CONST
     ymin, ymax, ystep = BEALE_FUNCTION_CONST
