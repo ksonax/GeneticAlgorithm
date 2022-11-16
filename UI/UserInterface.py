@@ -158,6 +158,7 @@ class App(customtkinter.CTk):
     def button_start(self):
         self.get_user_inputs()
 
+
     @staticmethod
     def change_appearance_mode(new_appearance_mode):
         customtkinter.set_appearance_mode(new_appearance_mode)
