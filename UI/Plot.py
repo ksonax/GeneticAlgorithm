@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import autograd.numpy as np
 
-from Algorithms.Function import beale_function
+from Algorithms.Function import beale_function_plot
 from Algorithms.FunctionsConst import BEALE_FUNCTION_CONST
 from matplotlib.colors import LogNorm
 
@@ -13,7 +13,7 @@ def plot_function():
     ymin, ymax, ystep = BEALE_FUNCTION_CONST
 
     x, y = np.meshgrid(np.arange(xmin, xmax + xstep, xstep), np.arange(ymin, ymax + ystep, ystep))
-    z = beale_function(x, y)
+    z = beale_function_plot(x, y)
     minima = np.array([3., .5])
     f(*minima)
     minima_ = minima.reshape(-1, 1)

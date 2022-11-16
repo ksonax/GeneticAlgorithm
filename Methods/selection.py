@@ -1,5 +1,8 @@
-from random import randint
+# genetic algorithm search for continuous function optimization
+from numpy.random import randint
 import random
+import numpy as np
+
 
 def tournament(pop, scores, k):
     # first random selection
@@ -10,14 +13,16 @@ def tournament(pop, scores, k):
             selection_ix = ix
     return pop[selection_ix]
 
+
 def best(pop, scores, k):
     p = []
-    for i in range(0, len(pop) - 1):
+    for i in range(0, len(pop)):
         p.append([scores[i], pop[i]])
     p.sort()
     p.reverse()
+    d2 = [item[1] for item in p]
+    return d2[k]
 
-    return p[:k]
 
 def roulette(pop, scores):
     suma = 0
