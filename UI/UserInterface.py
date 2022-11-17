@@ -1,6 +1,7 @@
 import customtkinter
 from UI.Plot import plot_function
 from Classes.UserInputs import UserInputs
+from Algorithms.geneticAlgorithm import genetic_algorithm
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -74,7 +75,7 @@ class App(customtkinter.CTk):
         self.label_radio_group.grid(row=0, column=2, columnspan=1, pady=15, padx=15, sticky="")
 
         self.combobox_selection_method = customtkinter.CTkComboBox(master=self.frame_right,
-                                                                   values=["Value 1", "Value 2"])
+                                                                   values=["Tournament", "Best", "Roulette"])
         self.combobox_selection_method.grid(row=1, column=2, columnspan=1, pady=15, padx=15, sticky="we")
 
         self.combobox_cross_method = customtkinter.CTkComboBox(master=self.frame_right,
@@ -83,7 +84,7 @@ class App(customtkinter.CTk):
         self.combobox_cross_method.grid(row=2, column=2, columnspan=1, pady=15, padx=15, sticky="we")
 
         self.combobox_mutation_method = customtkinter.CTkComboBox(master=self.frame_right,
-                                                                  values=["Value 1", "Value 2"])
+                                                                  values=["Edge", "One Point", "Two Point"])
         self.combobox_mutation_method.grid(row=3, column=2, columnspan=1, pady=15, padx=15, sticky="we")
 
         self.check_box_maximum = customtkinter.CTkCheckBox(master=self.frame_right,
@@ -157,6 +158,8 @@ class App(customtkinter.CTk):
 
     def button_start(self):
         self.get_user_inputs()
+        genetic_algorithm(user_input=self.get_user_inputs())
+
 
 
     @staticmethod
@@ -172,18 +175,18 @@ class App(customtkinter.CTk):
 
     def get_user_inputs(self):
         return UserInputs(
-            self.entry_range_a.get(),
-            self.entry_range_b.get(),
-            self.entry_population_amount.get(),
-            self.entry_number_of_bits.get(),
-            self.entry_epochs_amount.get(),
-            self.entry_best_and_tournament_chromosome_amount.get(),
-            self.entry_elite_strategy_ammount.get(),
-            self.entry_cross_probability_ammount.get(),
-            self.entry_mutation_probability.get(),
-            self.entry_inversion_probability.get(),
+            float(self.entry_range_a.get()),
+            float(self.entry_range_b.get()),
+            int(self.entry_population_amount.get()),
+            int(self.entry_number_of_bits.get()),
+            int(self.entry_epochs_amount.get()),
+            int(self.entry_best_and_tournament_chromosome_amount.get()),
+            int(self.entry_elite_strategy_ammount.get()),
+            float(self.entry_cross_probability_ammount.get()),
+            float(self.entry_mutation_probability.get()),
+            float(self.entry_inversion_probability.get()),
             self.combobox_selection_method.get(),
             self.combobox_cross_method.get(),
             self.combobox_mutation_method.get(),
-            self.check_box_maximum.get(),
+            bool(self.check_box_maximum.get()),
         )
