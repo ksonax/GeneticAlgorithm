@@ -63,9 +63,3 @@ def uniformCrossover(p1, p2):
     return [c1, c2]
 
 
-
-p1 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-p2 = [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
-
-print(uniformCrossover(p1, p2))
-
