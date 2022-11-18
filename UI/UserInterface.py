@@ -92,6 +92,9 @@ class App(customtkinter.CTk):
         self.check_box_maximum = customtkinter.CTkCheckBox(master=self.frame_right,
                                                            text="Maximum")
         self.check_box_maximum.grid(row=4, column=2, pady=15, padx=15, sticky="w")
+        self.check_box_elite_strategy = customtkinter.CTkCheckBox(master=self.frame_right,
+                                                           text="Elite Strategy")
+        self.check_box_elite_strategy.grid(row=5, column=2, pady=15, padx=15, sticky="w")
         self.entry_range_a = customtkinter.CTkEntry(master=self.frame_right,
                                                     width=120,
                                                     placeholder_text="Begin of range -a")
@@ -124,15 +127,10 @@ class App(customtkinter.CTk):
         self.entry_best_and_tournament_chromosome_amount.grid(
             row=5, column=0, columnspan=2, pady=15, padx=15, sticky="we")
 
-        self.entry_elite_strategy_ammount = customtkinter.CTkEntry(master=self.frame_right,
-                                                                   width=120,
-                                                                   placeholder_text="Elite Strategy amount")
-        self.entry_elite_strategy_ammount.grid(row=6, column=0, columnspan=2, pady=15, padx=15, sticky="we")
-
-        self.entry_cross_probability_ammount = customtkinter.CTkEntry(master=self.frame_right,
-                                                                      width=120,
-                                                                      placeholder_text="Cross probability")
-        self.entry_cross_probability_ammount.grid(row=7, column=0, columnspan=2, pady=15, padx=15, sticky="we")
+        self.entry_cross_probability_amount = customtkinter.CTkEntry(master=self.frame_right,
+                                                                     width=120,
+                                                                     placeholder_text="Cross probability")
+        self.entry_cross_probability_amount.grid(row=7, column=0, columnspan=2, pady=15, padx=15, sticky="we")
 
         self.entry_mutation_probability = customtkinter.CTkEntry(master=self.frame_right,
                                                                  width=120,
@@ -156,6 +154,7 @@ class App(customtkinter.CTk):
         self.combobox_cross_method.set("Cross Method")
         self.combobox_mutation_method.set("Mutation Method")
         self.check_box_maximum.select()
+        self.check_box_elite_strategy.select()
 
     def button_start(self):
         x = self.get_user_inputs()
@@ -188,12 +187,12 @@ class App(customtkinter.CTk):
             int(self.entry_number_of_bits.get()),
             int(self.entry_epochs_amount.get()),
             int(self.entry_best_and_tournament_chromosome_amount.get()),
-            int(self.entry_elite_strategy_ammount.get()),
-            float(self.entry_cross_probability_ammount.get()),
+            float(self.entry_cross_probability_amount.get()),
             float(self.entry_mutation_probability.get()),
             float(self.entry_inversion_probability.get()),
             self.combobox_selection_method.get(),
             self.combobox_cross_method.get(),
             self.combobox_mutation_method.get(),
             bool(self.check_box_maximum.get()),
+            bool(self.check_box_elite_strategy.get()),
         )
