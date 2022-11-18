@@ -107,7 +107,7 @@ def genetic_algorithm(user_input):
     decoded = decode(bounds, user_input.number_of_bits, best)
     print('f(%s) = %f' % (decoded, best_eval))
 
-    return [best, best_eval]
+    return [decoded, best_eval]
 
 
 # define range for input

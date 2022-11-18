@@ -1,7 +1,9 @@
 import customtkinter
 from UI.Plot import plot_function
 from Classes.UserInputs import UserInputs
-from Algorithms.geneticAlgorithm import genetic_algorithm
+from Algorithms.geneticAlgorithm import genetic_algorithm, decode
+from time import time
+from tkinter import messagebox
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -13,7 +15,7 @@ class App(customtkinter.CTk):
 
     def __init__(self):
         super().__init__()
-
+        self.timer = 0
         self.title("Genetic Algorithm for finding MIN/MAX in Beale Function")
         self.geometry(f"{App.WIDTH}x{App.HEIGHT}")
         self.protocol("WM_DELETE_WINDOW", self.on_closing)  # call .on_closing() when app gets closed
@@ -90,7 +92,6 @@ class App(customtkinter.CTk):
         self.check_box_maximum = customtkinter.CTkCheckBox(master=self.frame_right,
                                                            text="Maximum")
         self.check_box_maximum.grid(row=4, column=2, pady=15, padx=15, sticky="w")
-
         self.entry_range_a = customtkinter.CTkEntry(master=self.frame_right,
                                                     width=120,
                                                     placeholder_text="Begin of range -a")
@@ -157,8 +158,12 @@ class App(customtkinter.CTk):
         self.check_box_maximum.select()
 
     def button_start(self):
-        self.get_user_inputs()
-        genetic_algorithm(user_input=self.get_user_inputs())
+        x = self.get_user_inputs()
+        time_start = time()
+        best, best_eval = genetic_algorithm(user_input=x)
+        time_end = time()
+        result = "Execution  in sec:  " + str(time_end-time_start) + "\nBest x:  " + str(best) + "\nBest f(x):  " + str(best_eval)
+        messagebox.showinfo("Output",  result)
 
 
 
