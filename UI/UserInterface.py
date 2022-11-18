@@ -4,7 +4,7 @@ from Classes.UserInputs import UserInputs
 from Algorithms.geneticAlgorithm import genetic_algorithm, decode
 from time import time
 from tkinter import messagebox
-from Output.generateoutput import generate_csv
+from Output.generateoutput import generate_csv, generate_plot
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
@@ -163,6 +163,7 @@ class App(customtkinter.CTk):
         best, best_eval, gen_b_rows, gen_avg_rows, gen_std_dev_rows = genetic_algorithm(user_input=x)
         time_end = time()
         generate_csv(gen_b_rows, gen_avg_rows, gen_std_dev_rows)
+        generate_plot()
         result = "Execution  in sec:  " + str(time_end-time_start) + "\nBest x:  " + str(best) + "\nBest f(x):  " + str(best_eval)
         messagebox.showinfo("Output",  result)
 
