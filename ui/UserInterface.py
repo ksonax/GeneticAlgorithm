@@ -163,7 +163,8 @@ class UserInterface(customtkinter.CTk):
         time_end = time()
         generate_csv(gen_b_rows, gen_avg_rows, gen_std_dev_rows)
         generate_plot()
-        result = "Execution  in sec:  " + str(time_end-time_start) + "\nBest x:  " + str(best) + "\nBest f(x):  " + str(best_eval)
+        time_diff = time_end - time_start
+        result = 'Execution in sec: %f \n f(%s) = %f' % (round(time_diff, 5), best, best_eval)
         messagebox.showinfo("output",  result)
 
 
