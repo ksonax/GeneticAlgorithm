@@ -86,7 +86,8 @@ def genetic_algorithm(user_input):
             selected = [select.best(pop, scores, _) for _ in range(user_input.population_amount)]
         # create the next generation
         children = list()
-        children.append(best)
+        if user_input.elite_strategy:
+            children.append(best)
         for i in range(0, user_input.population_amount, 2):
             # get selected parents in pairs
             p1, p2 = selected[i], selected[i + 1]
@@ -127,7 +128,6 @@ defaultUser = UserInputs(
     number_of_bits=16,
     epochs_amount=1000,
     best_and_tournament_chromosome_amount=3,
-    elite_strategy_amount=0,
     cross_probability=0.5,
     mutation_probability=0.1,
     inversion_probability=0.1,
@@ -135,4 +135,5 @@ defaultUser = UserInputs(
     cross_method="cross",
     mutation_method="mutate",
     maximum=False,
+    elite_strategy=True,
 )
