@@ -1,8 +1,8 @@
-from UI.UserInterface import App
+from ui.UserInterface import UserInterface
 import os
 import sys
 
 
 if __name__ == "__main__":
-    app = App()
+    app = UserInterface()
     app.mainloop()

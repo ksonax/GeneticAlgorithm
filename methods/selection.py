@@ -1,14 +1,11 @@
 # genetic algorithm search for continuous function optimization
 from numpy.random import randint
 import random
-import numpy as np
 
 
 def tournament(pop, scores, k):
-    # first random selection
     selection_ix = randint(len(pop))
     for ix in randint(0, len(pop), k - 1):
-        # check if better (e.g. perform a tournament)
         if scores[ix] < scores[selection_ix]:
             selection_ix = ix
     return pop[selection_ix]

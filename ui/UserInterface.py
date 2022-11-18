@@ -1,15 +1,15 @@
 import customtkinter
-from UI.Plot import plot_function
-from Classes.UserInputs import UserInputs
-from Algorithms.geneticAlgorithm import genetic_algorithm, decode
+from ui.plot_function import plot_function
+from ui.UserInputs import UserInputs
+from algorithms.genetic_algorithm import genetic_algorithm
 from time import time
 from tkinter import messagebox
-from Output.generateoutput import generate_csv, generate_plot
+from output.generateoutput import generate_csv, generate_plot
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
 
-class App(customtkinter.CTk):
+class UserInterface(customtkinter.CTk):
     WIDTH = 780
     HEIGHT = 720
 
@@ -17,7 +17,7 @@ class App(customtkinter.CTk):
         super().__init__()
         self.timer = 0
         self.title("Genetic Algorithm for finding MIN/MAX in Beale Function")
-        self.geometry(f"{App.WIDTH}x{App.HEIGHT}")
+        self.geometry(f"{UserInterface.WIDTH}x{UserInterface.HEIGHT}")
         self.protocol("WM_DELETE_WINDOW", self.on_closing)  # call .on_closing() when app gets closed
 
         # ============ create two frames ============
@@ -102,7 +102,7 @@ class App(customtkinter.CTk):
 
         self.entry_range_b = customtkinter.CTkEntry(master=self.frame_right,
                                                     width=120,
-                                                    placeholder_text="Begin of range -b")
+                                                    placeholder_text="End of range -b")
         self.entry_range_b.grid(row=1, column=0, columnspan=2, rowspan=1, pady=15, padx=15, sticky="we")
 
         self.entry_population_amount = customtkinter.CTkEntry(master=self.frame_right,
@@ -164,7 +164,7 @@ class App(customtkinter.CTk):
         generate_csv(gen_b_rows, gen_avg_rows, gen_std_dev_rows)
         generate_plot()
         result = "Execution  in sec:  " + str(time_end-time_start) + "\nBest x:  " + str(best) + "\nBest f(x):  " + str(best_eval)
-        messagebox.showinfo("Output",  result)
+        messagebox.showinfo("output",  result)
 
 
 
