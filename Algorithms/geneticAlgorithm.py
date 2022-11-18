@@ -6,7 +6,8 @@ import Methods.mutation as mutation
 import Methods.cross as cross
 import Methods.selection as select
 from Classes.UserInputs import UserInputs
-import csv
+from statistics import stdev, mean
+
 
 def inversion(bitstring: list, r_inve):
     c1 = bitstring.copy()
@@ -43,17 +44,15 @@ def decode(bounds, n_bits, bitstring):
 
 # genetic algorithm
 def genetic_algorithm(user_input):
-    f = open('././output/output.csv', 'w', newline='')
-    writer = csv.writer(f)
-    header = ['Gen', 'f(x)']
-    writer.writerow(header)
     # initial population of random bitstring
     bounds = [[user_input.begin_range_a, user_input.end_range_b], [user_input.begin_range_a, user_input.end_range_b]]
     pop = [randint(0, 2, user_input.number_of_bits * len(bounds)).tolist() for _ in range(user_input.population_amount)]
     # keep track of best solution
     best, best_eval = 0, beale_function(decode(bounds, user_input.number_of_bits, pop[0]))
     # enumerate generations
-
+    gen_b_rows = []
+    gen_avg_rows = []
+    gen_std_dev_rows = []
     for gen in range(user_input.epochs_amount):
         # decode population
         decoded = [decode(bounds, user_input.number_of_bits, p) for p in pop]
@@ -62,8 +61,6 @@ def genetic_algorithm(user_input):
         best_iter = scores[0]
         # check for new best solution
         for i in range(user_input.population_amount):
-            # TUTAJ ZMIENIC jak COS
-
             if user_input.maximum:
                 if scores[i] > best_eval:
                     best, best_eval = pop[i], scores[i]
@@ -76,12 +73,13 @@ def genetic_algorithm(user_input):
                     print(">%d, new best f(%s) = %f" % (gen, decoded[i], scores[i]))
                 if scores[i] < best_iter:
                     best_iter = scores[i]
-        row = [str(gen), str(best_iter)]
-        writer.writerow(row)
-
+        gen_b_rows.append([str(gen), str(best_iter)])
+        gen_avg_rows.append([str(gen), mean(scores)])
+        gen_std_dev_rows.append([str(gen), str(stdev(scores))])
         # select parents
         if user_input.selection_method == "Tournament":
-            selected = [select.tournament(pop, scores, user_input.best_and_tournament_chromosome_amount) for _ in range(user_input.population_amount)]
+            selected = [select.tournament(pop, scores, user_input.best_and_tournament_chromosome_amount) for _ in
+                        range(user_input.population_amount)]
         if user_input.selection_method == "Roulette":
             selected = [select.roulette(pop, scores) for _ in range(user_input.population_amount)]
         if user_input.selection_method == "Best":
@@ -118,8 +116,7 @@ def genetic_algorithm(user_input):
     print('Done!')
     decoded = decode(bounds, user_input.number_of_bits, best)
     print('f(%s) = %f' % (decoded, best_eval))
-    f.close()
-    return [decoded, best_eval]
+    return [decoded, best_eval, gen_b_rows, gen_avg_rows, gen_std_dev_rows]
 
 
 # define range for input
