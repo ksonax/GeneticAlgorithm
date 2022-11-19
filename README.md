@@ -1,4 +1,4 @@
-# Genetic Algorithm For Beale Functio
+# Genetic Algorithm For Beale Function
 Evolutionary Computing - Cracow University Of Technology - Project
 
 ## Install required libraries:
