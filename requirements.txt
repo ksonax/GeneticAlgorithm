@@ -1,0 +1,10 @@
+math
+matplotlib
+autograd
+customkinter
+numpy
+statistics
+random
+pandas
+time
+tkinter
